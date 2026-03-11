@@ -1,13 +1,14 @@
-# Telecom X - Parte 2: Predicción de Cancelación de Clientes (Churn)
+# Telecom X – Parte 2: Predicción de Cancelación de Clientes (Churn)
 
 ## Descripción del Proyecto
 
-Este proyecto forma parte del programa **Oracle Next Education (ONE) en colaboración con Alura Latam** y tiene como objetivo desarrollar modelos de **Machine Learning capaces de predecir la cancelación de clientes (Churn)** en la empresa Telecom X.
+Este proyecto forma parte del programa **Oracle Next Education (ONE) en colaboración con Alura Latam**. El objetivo es desarrollar modelos de **Machine Learning capaces de predecir la cancelación de clientes (Churn)** en la empresa Telecom X.
 
-En la **Parte 1 del desafío**, se realizó el proceso ETL y análisis exploratorio de los datos.  
-En esta **Parte 2**, se construyen modelos predictivos que permiten identificar clientes con mayor riesgo de cancelación.
+En la **Parte 1 del desafío**, se realizó el proceso de **ETL (Extracción, Transformación y Limpieza de datos)** junto con un análisis exploratorio (EDA).
 
-El objetivo final es proporcionar información estratégica que permita a Telecom X **anticipar la pérdida de clientes y diseñar estrategias de retención más efectivas**.
+En esta **Parte 2**, se utilizan los datos tratados para construir modelos predictivos que permitan identificar clientes con mayor probabilidad de cancelar el servicio.
+
+El objetivo final es ayudar a Telecom X a **anticiparse a la pérdida de clientes y diseñar estrategias de retención más efectivas**.
 
 ---
 
@@ -26,6 +27,7 @@ Desarrollar modelos predictivos que permitan:
 
 El proyecto fue desarrollado en **Python** utilizando las siguientes bibliotecas:
 
+- Python
 - Pandas
 - NumPy
 - Matplotlib
@@ -36,30 +38,31 @@ El proyecto fue desarrollado en **Python** utilizando las siguientes bibliotecas
 ---
 
 # Estructura del Proyecto
-
-
-TelecomX-Churn-Prediction/
+TelecomX-Churn-Prediction
 │
 ├── TelecomX_Parte2.ipynb
 ├── datos_tratados.csv
-├── README.md
+└── README.md
 
 
 ### Archivos principales
 
-**TelecomX_Parte2.ipynb**  
+**TelecomX_Parte2.ipynb**
+
 Notebook principal que contiene:
 
-- Preparación de datos
-- Análisis exploratorio adicional
-- Construcción de modelos
+- Preparación de los datos
+- Análisis de correlación
+- Entrenamiento de modelos de Machine Learning
 - Evaluación de desempeño
 - Interpretación de resultados
 
-**datos_tratados.csv**  
-Dataset limpio generado en la Parte 1 del desafío.
+**datos_tratados.csv**
 
-**README.md**  
+Dataset limpio generado en la **Parte 1 del desafío**, utilizado para entrenar los modelos predictivos.
+
+**README.md**
+
 Documentación del proyecto.
 
 ---
@@ -76,15 +79,132 @@ Las principales etapas de preparación incluyeron:
 - Análisis de correlación entre variables
 - Análisis dirigido de variables clave como:
 
-  - Tiempo de contrato
-  - Gasto mensual
-  - Gasto total
+- Tiempo de contrato
+- Gasto mensual
+- Gasto total
 
 ---
 
-# Balanceo de Clases
+# Análisis de la Proporción de Cancelación
 
-Se analizó la proporción de cancelación de clientes utilizando:
+Se analizó la distribución de la variable **churn** para verificar el balance entre las clases.
 
-```python
-df['churn'].value_counts(normalize=True)
+Esto permite identificar si existe **desbalance en los datos**, lo cual puede afectar el rendimiento de los modelos predictivos.
+
+---
+
+# División del Dataset
+
+El conjunto de datos se dividió en:
+
+- **70% datos de entrenamiento**
+- **30% datos de prueba**
+
+Se utilizó **estratificación** para mantener la misma proporción de churn en ambos conjuntos.
+
+---
+
+# Modelos Predictivos Utilizados
+
+Se implementaron dos algoritmos de Machine Learning.
+
+## Regresión Logística
+
+Modelo lineal utilizado como modelo base interpretable.
+
+Características:
+
+- Sensible a la escala de los datos
+- Requiere estandarización
+- Permite analizar la influencia de cada variable mediante sus coeficientes
+
+## Random Forest
+
+Modelo basado en árboles de decisión.
+
+Ventajas:
+
+- Captura relaciones no lineales
+- No requiere normalización
+- Permite analizar la **importancia de las variables**
+
+---
+
+# Evaluación de los Modelos
+
+Los modelos fueron evaluados utilizando las siguientes métricas:
+
+- Accuracy (Exactitud)
+- Precision
+- Recall
+- F1-score
+- Matriz de confusión
+
+Estas métricas permiten analizar tanto el rendimiento general como la capacidad del modelo para identificar correctamente clientes en riesgo de cancelación.
+
+---
+
+# Importancia de Variables
+
+Se analizaron las variables más relevantes para la predicción de churn.
+
+Se utilizaron dos enfoques:
+
+**Regresión Logística**
+
+Interpretación de los coeficientes del modelo.
+
+**Random Forest**
+
+Importancia de variables basada en la reducción de impureza en los árboles.
+
+Este análisis permite identificar los factores que más influyen en la cancelación de clientes.
+
+---
+
+# Principales Factores Asociados al Churn
+
+El análisis sugiere que la cancelación de clientes está relacionada con factores como:
+
+- Tiempo de permanencia del cliente
+- Tipo de contrato
+- Método de pago
+- Cargos mensuales
+- Servicios adicionales contratados
+
+Estas variables permiten identificar perfiles de clientes con mayor riesgo de cancelación.
+
+---
+
+# Conclusiones Estratégicas
+
+Los resultados muestran que es posible predecir la cancelación de clientes utilizando modelos de Machine Learning.
+
+Esto permite a Telecom X:
+
+- Detectar clientes con alto riesgo de abandono
+- Implementar estrategias de retención anticipadas
+- Diseñar campañas de fidelización más efectivas
+- Optimizar la toma de decisiones basada en datos
+
+El uso de modelos predictivos puede convertirse en una **herramienta estratégica para reducir la pérdida de clientes y mejorar la competitividad de la empresa**.
+
+---
+
+# Cómo Ejecutar el Proyecto
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/tuusuario/telecomx-churn-prediction
+### 2. Abrir el notebook en Google Colab o Jupyter Notebook
+### 3. Instalar dependencias si es necesario
+pip install pandas numpy matplotlib seaborn scikit-learn
+### 4. Ejecutar las celdas en orden
+
+
+Autor
+
+Sindy Campillo
+Proyecto desarrollado como parte del programa
+Oracle Next Education (ONE) – Alura Latam
